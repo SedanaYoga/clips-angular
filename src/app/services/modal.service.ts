@@ -13,6 +13,10 @@ export class ModalService {
 
   constructor() {}
 
+  unregister(id: string) {
+    this.modals = this.modals.filter((element) => element.id !== id)
+  }
+
   register(id: string) {
     this.modals.push({
       id,
