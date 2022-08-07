@@ -11,7 +11,14 @@
       [(ngModel)]="credentials.email"
       required
       pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+      #email="ngModel"
     />
+    <p
+      *ngIf="email.errors && email.touched && email.dirty"
+      class="text-red-400"
+    >
+      The email is invalid
+    </p>
   </div>
   <!-- Password -->
   <div class="mb-3">
@@ -31,4 +38,3 @@
     Submit
   </button>
 </form>
-<div>{{ loginForm.valid }}</div>
