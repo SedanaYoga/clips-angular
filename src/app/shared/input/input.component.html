@@ -29,4 +29,10 @@
   <p *ngIf="control.errors?.max" class="text-red-400">
     You're too old for this game
   </p>
+  <p *ngIf="control.errors?.notMatch" class="text-red-400">
+    Passwords do not match.
+  </p>
+  <p *ngIf="control.errors?.emailTaken" class="text-red-400">
+    Email taken, please use another one
+  </p>
 </ng-container>
