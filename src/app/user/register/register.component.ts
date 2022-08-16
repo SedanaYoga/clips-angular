@@ -11,9 +11,7 @@ import IUser from 'src/app/models/user.model'
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  constructor(private auth: AuthService) { }
-
-  inSubmission = false
+  constructor(private auth: AuthService) {}
 
   name = new FormControl('', [Validators.required, Validators.minLength(3)])
   email = new FormControl('', [Validators.required, Validators.email])
@@ -36,6 +34,7 @@ export class RegisterComponent {
   showAlert = false
   alertMsg = 'Please wait your account is being created'
   alertColor = 'blue'
+  inSubmission = false
 
   registerForm = new FormGroup({
     name: this.name,

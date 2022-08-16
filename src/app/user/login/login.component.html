@@ -1,5 +1,8 @@
 <!-- Login Form -->
 <form #loginForm="ngForm" (ngSubmit)="login()">
+  <app-alert *ngIf="showAlert" [color]="alertColor">
+    {{ alertMsg }}
+  </app-alert>
   <!-- Email -->
   <div class="mb-3">
     <label class="inline-block mb-2">Email</label>
@@ -20,6 +23,7 @@
       The email is invalid
     </p>
   </div>
+
   <!-- Password -->
   <div class="mb-3">
     <label class="inline-block mb-2">Password</label>
@@ -39,10 +43,11 @@
       Password can't be empty
     </p>
   </div>
+
   <button
     type="submit"
     class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition hover:bg-indigo-500 disabled:opacity-50 disabled:bg-indigo-400"
-    [disabled]="loginForm.invalid"
+    [disabled]="loginForm.invalid || inSubmission"
   >
     Submit
   </button>
