@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/compat/auth'
-import { NavigationEnd, Router } from '@angular/router'
-import { ActivatedRoute } from '@angular/router'
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router'
 import {
   AngularFirestore,
   AngularFirestoreCollection,
