@@ -18,10 +18,14 @@ const routes: Routes = [
       authOnly: true,
     },
   },
+  {
+    path: 'manage-clips',
+    redirectTo: 'manage',
+  },
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class VideoRoutingModule {}
+export class VideoRoutingModule { }
