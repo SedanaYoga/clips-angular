@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core'
 export class UploadComponent implements OnInit {
   isDragover = false
   file: File | null = null
+  nextStep = false
 
   constructor() { }
 
@@ -20,6 +21,6 @@ export class UploadComponent implements OnInit {
 
     if (!this.file || this.file.type !== 'video/mp4') return
 
-    console.log(this.file)
+    this.nextStep = true
   }
 }
