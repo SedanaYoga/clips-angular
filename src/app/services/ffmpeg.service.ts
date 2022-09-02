@@ -6,6 +6,7 @@ import { log } from 'console'
   providedIn: 'root',
 })
 export class FfmpegService {
+  isRunning = false
   isReady = false
   private ffmpeg
 
@@ -24,6 +25,7 @@ export class FfmpegService {
   }
 
   async getScreenshots(file: File) {
+    this.isRunning = true
     const data = await fetchFile(file)
     const seconds = [1, 2, 3]
     const commands: string[] = []
@@ -59,6 +61,8 @@ export class FfmpegService {
       const screenshotURL = URL.createObjectURL(screenshotBlob)
       screenshots.push(screenshotURL)
     })
+
+    this.isRunning = false
 
     return screenshots
   }
