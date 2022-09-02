@@ -56,9 +56,15 @@ export class ClipService {
 
   async deleteClip(clip: IClip) {
     const clipRef = this.storage.ref(`clips/${clip.fileName}`)
+    const screenshotRef = this.storage.ref(
+      `screenshots/${clip.screenshotFileName}`,
+    )
 
+    // Firebase Storage (Image/Video)
     await clipRef.delete()
+    await screenshotRef.delete()
 
+    // Firebase Firestore (Clip database)
     await this.clipsCollection.doc(clip.docID).delete()
   }
 }
