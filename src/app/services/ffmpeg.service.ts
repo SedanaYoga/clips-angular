@@ -47,7 +47,6 @@ export class FfmpegService {
       )
     })
 
-    console.log(commands)
     await this.ffmpeg.run(...commands)
 
     const screenshots: string[] = []
