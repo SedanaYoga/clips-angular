@@ -7,7 +7,7 @@ import {
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import firebase from 'firebase/compat/app'
 import { v4 as uuid } from 'uuid'
-import { last, switchMap } from 'rxjs'
+import { combineLatest, last, switchMap } from 'rxjs'
 import { ClipService } from 'src/app/services/clip.service'
 import { Router } from '@angular/router'
 import { FfmpegService } from 'src/app/services/ffmpeg.service'
@@ -96,11 +96,22 @@ export class UploadComponent implements OnDestroy {
     const screenshotPath = `screenshots/${clipFileName}.png`
 
     this.task = this.storage.upload(clipPath, this.file)
-    this.task.percentageChanges().subscribe((progress) => {
-      this.percentage = (progress as number) / 100
-    })
 
     this.screenshotTask = this.storage.upload(screenshotPath, screenshotBlob)
+
+    combineLatest([
+      this.task.percentageChanges(),
+      this.screenshotTask.percentageChanges(),
+    ]).subscribe((progress) => {
+      const [clipProgress, screenshotProgress] = progress
+
+      if (!clipProgress || !screenshotProgress) {
+        return
+      }
+
+      const total = clipProgress + screenshotProgress
+      this.percentage = (total as number) / 200
+    })
 
     const clipRef = this.storage.ref(clipPath)
 
